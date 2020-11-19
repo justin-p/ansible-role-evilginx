@@ -1,5 +1,8 @@
 ---
 # defaults file for evilginx2
-evilginx2_path: /opt/evilginx2
-evilginx2_repo_url: https://github.com/kgretzky/evilginx2
-evilginx2_repo_tag: 2.4.0
+evilginx2_version: 2.4.0
+evilginx2_platform: linux
+evilginx2_arch: amd64
+evilginx2_sha256: sha256:595a77ddfb6f674bd5bc1c297ae912f5ebf6ba218a2f857ff46b7b37d1a9678b
+evilginx2_download_destination: "/tmp/evilginx2-{{ evilginx2_version }}-{{ evilginx2_platform }}-{{ evilginx2_arch }}.tar.gz"
+evilginx2_install_destination: /opt
