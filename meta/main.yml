@@ -1,7 +1,7 @@
 galaxy_info:
   role_name: evilginx2
   author: Justin Perdok
-  description: evilginx2 is a man-in-the-middle attack framework used for phishing login credentials along with session cookies, which in turn allows to bypass 2-factor authentication protection.
+  description: evilginx2 is a man-in-the-middle attack framework used for phishing login credentials and session cookies
 
   license: MIT
 
@@ -63,5 +63,11 @@ dependencies:
     version: v1.1.0
     vars:
       bash_aliases:
-        - { alias: 'setup_tmux',      command: 'tmux new-session -d -s "evilginx"' }
-        - { alias: 'start_evilginx2', command: 'docker run -it -p 80:80 -p 443:443 -v /root/.evilginx:/root/.evilginx -v /opt/evilginx2/phishlets/:/app/phishlets evilginx2' }
+        - {
+            alias: 'setup_tmux',
+            command: 'tmux new-session -d -s "evilginx"'
+          }
+        - {
+            alias: 'start_evilginx2',
+            command: 'docker run -it -p 80:80 -p 443:443 -v /root/.evilginx:/root/.evilginx -v /opt/evilginx2/phishlets/:/app/phishlets evilginx2'
+          }
