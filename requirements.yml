@@ -12,5 +12,3 @@
     pip_package: python3-pip
     pip_install_packages:
       - name: docker
-- role: igor_mukhin.bash_aliases
-  version: v1.1.0

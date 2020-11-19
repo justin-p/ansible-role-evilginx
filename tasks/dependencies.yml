@@ -1,0 +1,13 @@
+---
+- name: Install dependencies from apt
+  ansible.builtin.package:
+    name: "{{ evilginx2_packages }}"
+    state: present
+
+- name: Ensure the "{{ evilginx2_path }}" directory exists
+  file:
+    path: "{{ evilginx2_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0750"
