@@ -4,7 +4,7 @@
     path: "{{ evilginx2_download_destination }}"
   register: tar
 
-- name: "Downloading gophish-v{{ gophish_version }}-{{ gophish_platform }}-{{ gophish_arch }}.zip."
+- name: "Downloading evilginx-{{ evilginx2_platform }}-{{ evilginx2_arch }}.tar.gz"
   get_url:
     validate_certs: True
     url: "{{ evilginx2_url }}"
@@ -12,35 +12,20 @@
     dest: "{{ evilginx2_download_destination }}"
   when: not tar.stat.exists
 
-#- name: Unzip gophish-v{{ gophish_version }}-{{ gophish_platform }}-{{ gophish_arch }}.zip
-  #unarchive:
-   # src: "{{ gophish_download_destination }}"
-   # dest: "{{ gophish_install_destination }}"
-   # remote_src: yes
-   # owner: "{{ gophish_user }}"
-   # group: "{{ gophish_user }}"
-   # mode: 0740
-  #when: not zip.stat.exists
+- name: Unzip evilginx-{{ evilginx2_platform }}-{{ evilginx2_arch }}.tar.gz
+  unarchive:
+    src: "{{ evilginx2_download_destination }}"
+    dest: "{{ evilginx2_install_destination }}"
+    remote_src: yes
+    mode: 0740
+  when: not tar.stat.exists
 
-#  - include_role:
-#    name: igor_mukhin.bash_aliases
-#    version: v1.1.0
-#    vars:
-#      bash_aliases:
-#        - {
-#            alias: 'setup_tmux',
-#            command: 'tmux new-session -d -s "evilginx"'
-#          }
-#        - {
-#            alias: 'start_evilginx2',
-#            command: 'docker run -it -p 80:80 -p 443:443 -v /root/.evilginx:/root/.evilginx -v /opt/evilginx2/phishlets/:/app/phishlets evilginx2'
-#          }
-
-#- name: Run evilginx2 container in tmux session # noqa 305
-#  shell: "{{ item }}"
-#  with_items:
-#    - tmux new-session -d -s "start_tmux_server"
-#    - tmux kill-server
-#    - tmux new-session -d -s "evilginx2"
-#    - tmux send-keys -t evilginx2.0 start_evilginx2 ENTER
-#  changed_when: false
+- name: Run evilginx2 in tmux session # noqa 305
+  shell: "{{ item }}"
+  with_items:
+    - tmux new-session -d -s "start_tmux_server"
+    - tmux kill-server
+    - tmux new-session -d -s "evilginx2"
+    - tmux send-keys -t evilginx2.0 'cd {{ evilginx2_install_destination }}/evilginx' ENTER
+    - tmux send-keys -t evilginx2.0 'sudo ./evilginx' ENTER
+  changed_when: false

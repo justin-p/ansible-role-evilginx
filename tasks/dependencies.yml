@@ -4,9 +4,9 @@
     name: "{{ evilginx2_packages }}"
     state: present
 
-- name: Ensure the "{{ evilginx2_path }}" directory exists
+- name: "Ensure the {{ evilginx2_install_destination }} directory exists"
   file:
-    path: "{{ evilginx2_path }}"
+    path: "{{ evilginx2_install_destination }}"
     state: directory
     owner: root
     group: root
