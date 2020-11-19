@@ -5,7 +5,6 @@
 [![Ansible Role Downloads](https://img.shields.io/ansible/role/d/51897?label=Ansible%20Role%20Downloads&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/evilginx2)
 [![Github Actions](https://img.shields.io/github/workflow/status/justin-p/ansible-role-evilginx2/CI?label=Github%20Actions&logo=github&style=flat-square)](https://github.com/justin-p/ansible-role-evilginx2/actions)
 
-
 ## Requirements
 
 None.
@@ -14,14 +13,20 @@ None.
 
 `defaults/main.yml`
 
-| Variable | Description | Default value |
-| -------- | ----------- | ------------- |
+| Variable                       | Description                                                                                    | Default value                                                                               |
+| ------------------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| evilginx2_version              | The version of evilginx2 to install.                                                           | 2.4.0                                                                                       |
+| evilginx2_platform             | The platform type.                                                                             | linux                                                                                       |
+| evilginx2_arch                 | The architecture.                                                                              | amd64                                                                                       |
+| evilginx2_sha256               | The sha256 sum of the downloaded file that matches the version, platform and arch combination. | sha256:595a77ddfb6f674bd5bc1c297ae912f5ebf6ba218a2f857ff46b7b37d1a9678b                     |
+| evilginx2_download_destination | The download destination of the gophish release tar.gz file.                                   | /tmp/evilginx2-{{ evilginx2_version }}-{{ evilginx2_platform }}-{{ evilginx2_arch }}.tar.gz |
+| evilginx2_install_destination  | The install destination of gophish.                                                            | /opt                                                                                        |
 
 ## Dependencies
 
-[geerlingguy.pip](https://github.com/geerlingguy/ansible-role-pip)  
-[robertdebock.update_package_cache](https://github.com/robertdebock/ansible-role-update_package_cache)  
-[robertdebock.core_dependencies](https://github.com/robertdebock/ansible-role-core_dependencies)  
+[geerlingguy.pip](https://github.com/geerlingguy/ansible-role-pip)
+[robertdebock.update_package_cache](https://github.com/robertdebock/ansible-role-update_package_cache)
+[robertdebock.core_dependencies](https://github.com/robertdebock/ansible-role-core_dependencies)
 
 ## Example Playbooks
 
