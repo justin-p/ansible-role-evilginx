@@ -1,0 +1,37 @@
+---
+# tasks file for evilginx2- include_role:
+- name: Install git and tmux are installed
+  ansible.builtin.package:
+    name: "{{ evilginx2_packages }}"
+    state: present
+
+- name: Ensure the "{{ evilginx2_path }}" directory exists
+  file:
+    path: "{{ evilginx2_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0750"
+
+- name: Clone evilginx2 using the "{{ evilginx2_repo_tag }}"
+  git:
+    repo: "{{ evilginx2_repo_url }}"
+    dest: "{{ evilginx2_path }}"
+    version: "{{ evilginx2_repo_tag }}"
+
+- name: Build docker image for evilginx2
+  docker_image:
+    name: evilginx2
+    build:
+      pull: no
+      path: "{{ evilginx2_path }}"
+    source: build
+
+- name: Run evilginx2 container in tmux session
+  shell: "{{ item }}"
+  with_items:
+    - tmux new-session -d -s "start_tmux_server"
+    - tmux kill-server
+    - tmux new-session -d -s "evilginx2"
+    - tmux send-keys -t evilginx2.0 start_evilginx2 ENTER
+  changed_when: false

@@ -1,0 +1,5 @@
+---
+# vars file for evilginx2
+evilginx2_packages:
+  - git
+  - tmux

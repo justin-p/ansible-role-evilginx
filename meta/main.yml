@@ -1,0 +1,67 @@
+galaxy_info:
+  role_name: evilginx2
+  author: Justin Perdok
+  description: evilginx2 is a man-in-the-middle attack framework used for phishing login credentials along with session cookies, which in turn allows to bypass 2-factor authentication protection.
+
+  license: MIT
+
+  min_ansible_version: 2.9
+
+  platforms:
+    #- name: opensuse
+    #  versions:
+    #    - 15.2
+    #- name: alpine
+    #  versions:
+    #    - any
+    #- name: ArchLinux
+    #  versions:
+    #    - any
+    #- name: debian
+    #  versions:
+    #    - buster
+    - name: Ubuntu
+      versions:
+        - xenial
+    #    - bionic
+    #    - artful
+    #- name: Amazon
+    #  versions:
+    #    - 2018.03
+    #- name: Amazon Linux 2
+    #  versions:
+    #    - any
+    #- name: Fedora
+    #  versions:
+    #    - 30
+    #    - 31
+    #    - 32
+    #- name: EL
+    #  versions:
+    #    - 7
+    #    - 8
+
+  galaxy_tags: ["evilginx2", "phising"]
+
+dependencies:
+  - role: robertdebock.update_package_cache
+    version: 1.1.14
+    tags: molecule-idempotence-notest
+  - role: robertdebock.core_dependencies
+    version: 1.5.0
+  - include_role:
+    name: geerlingguy.docker
+    version: 2.8.1
+  - role: geerlingguy.pip
+    version: 2.0.0
+    vars:
+      pip_package: python3-pip
+      pip_install_packages:
+        - name: docker
+  - include_role:
+    name: igor_mukhin.bash_aliases
+    version: v1.1.0
+    vars:
+      bash_aliases:
+        - { alias: 'setup_tmux',      command: 'tmux new-session -d -s "evilginx"' }
+        - { alias: 'start_evilginx2', command: 'docker run -it -p 80:80 -p 443:443 -v /root/.evilginx:/root/.evilginx -v /opt/evilginx2/phishlets/:/app/phishlets evilginx2' }

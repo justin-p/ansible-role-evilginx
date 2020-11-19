@@ -1,0 +1,5 @@
+---
+# defaults file for evilginx2
+evilginx2_path: /opt/evilginx2
+evilginx2_repo_url: https://github.com/kgretzky/evilginx2
+evilginx2_repo_tag: 2.4.0
