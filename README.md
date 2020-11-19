@@ -5,6 +5,8 @@
 [![Ansible Role Downloads](https://img.shields.io/ansible/role/d/51897?label=Ansible%20Role%20Downloads&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/evilginx2)
 [![Github Actions](https://img.shields.io/github/workflow/status/justin-p/ansible-role-evilginx2/CI?label=Github%20Actions&logo=github&style=flat-square)](https://github.com/justin-p/ansible-role-evilginx2/actions)
 
+A Ansible role that deploys the evilginx2 application and starts it in a tmux session. 
+
 ## Requirements
 
 None.
