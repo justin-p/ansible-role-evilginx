@@ -111,6 +111,7 @@ jobs:
     if: github.event_name == 'release'
     needs:
       - default
+      - example_playbook
     runs-on: ubuntu-latest
     steps:
       - name: galaxy
