@@ -41,6 +41,32 @@ This playbook is tested as part of the role CI.
 
 ```yaml
 ---
+- name: Deploy Evilginx2
+  hosts: evilginx2_hosts
+  tasks:
+    - include_role:
+        name: robertdebock.update_package_cache
+      tags: molecule-idempotence-notest
+    - include_role:
+        name: robertdebock.bootstrap
+    - include_role:
+        name: robertdebock.update
+      vars:
+        update_reboot: no
+    - include_role:
+        name: robertdebock.firewall
+      vars:
+        firewall_services:
+          - name: ssh
+          - name: http
+          - name: https
+    - include_role:
+        name: robertdebock.hostname
+      vars:
+        hostname: evilginx.local
+        hostname_reboot: no
+    - include_role:
+      name: justin_p.evilginx2
 ```
 
 ## Local Development
