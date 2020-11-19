@@ -30,7 +30,7 @@ on:
 jobs:
   default:
     name: Test default scenario.
-    runs-on: ubuntu-latest
+    runs-on: Ubuntu-20.04
     strategy:
       matrix:
         image:
