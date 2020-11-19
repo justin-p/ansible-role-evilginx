@@ -1,0 +1,6 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: test connection
+      ping:
