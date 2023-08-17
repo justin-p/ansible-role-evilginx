@@ -1,6 +1,6 @@
 ---
-# tasks file for evilginx2
+# tasks file for evilginx
 - block:
-  - import_tasks: dependencies.yml
-  - import_tasks: evilginx2.yml
+  - ansible.builtin.import_tasks: dependencies.yml
+  - ansible.builtin.import_tasks: evilginx.yml
   become: true

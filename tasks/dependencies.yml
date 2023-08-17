@@ -1,12 +1,12 @@
 ---
 - name: Install dependencies from apt
   ansible.builtin.package:
-    name: "{{ evilginx2_packages }}"
+    name: "{{ evilginx_packages }}"
     state: present
 
-- name: "Ensure the {{ evilginx2_install_destination }} directory exists"
+- name: "Ensure the {{ evilginx_install_destination }} directory exists"
   file:
-    path: "{{ evilginx2_install_destination }}"
+    path: "{{ evilginx_install_destination }}"
     state: directory
     owner: root
     group: root

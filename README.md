@@ -1,11 +1,11 @@
-# ansible-role-evilginx2
+# ansible-role-evilginx
 
-[![Ansible Role Name](https://img.shields.io/ansible/role/51897?label=Role%20Name&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/evilginx2)
-[![Ansible Quality Score](https://img.shields.io/ansible/quality/51897?label=Ansible%20Quality%20Score&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/evilginx2)
-[![Ansible Role Downloads](https://img.shields.io/ansible/role/d/51897?label=Ansible%20Role%20Downloads&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/evilginx2)
-[![Github Actions](https://img.shields.io/github/workflow/status/justin-p/ansible-role-evilginx2/CI?label=Github%20Actions&logo=github&style=flat-square)](https://github.com/justin-p/ansible-role-evilginx2/actions)
+[![Ansible Role Name](https://img.shields.io/ansible/role/51897?label=Role%20Name&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/evilginx)
+[![Ansible Quality Score](https://img.shields.io/ansible/quality/51897?label=Ansible%20Quality%20Score&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/evilginx)
+[![Ansible Role Downloads](https://img.shields.io/ansible/role/d/51897?label=Ansible%20Role%20Downloads&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/evilginx)
+[![Github Actions](https://img.shields.io/github/workflow/status/justin-p/ansible-role-evilginx/CI?label=Github%20Actions&logo=github&style=flat-square)](https://github.com/justin-p/ansible-role-evilginx/actions)
 
-A Ansible role that deploys the [evilginx2](https://github.com/kgretzky/evilginx2) application and starts it in a tmux session. 
+A Ansible role that clones and builds the [evilginx](https://github.com/kgretzky/evilginx) application, clones a (configurable) additional [phishlet repository](https://github.com/An0nUD4Y/Evilginx2-Phishlets) and starts evilginx in a tmux session.
 
 ## Requirements
 
@@ -15,15 +15,18 @@ None.
 
 `defaults/main.yml`
 
-| Variable                       | Description                                                                                    | Default value                                                                               |
-| ------------------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| evilginx2_version              | The version of evilginx2 to install.                                                           | 2.4.0                                                                                       |
-| evilginx2_platform             | The platform type.                                                                             | linux                                                                                       |
-| evilginx2_arch                 | The architecture.                                                                              | amd64                                                                                       |
-| evilginx2_sha256               | The sha256 sum of the downloaded file that matches the version, platform and arch combination. | sha256:595a77ddfb6f674bd5bc1c297ae912f5ebf6ba218a2f857ff46b7b37d1a9678b                     |
-| evilginx2_download_destination | The download destination of the gophish release tar.gz file.                                   | /tmp/evilginx2-{{ evilginx2_version }}-{{ evilginx2_platform }}-{{ evilginx2_arch }}.tar.gz |
-| evilginx2_install_destination  | The install destination of gophish.                                                            | /opt                                                                                        |
-
+| Variable                               | Description                                                                | Default value                                                                                |
+| -------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| evilginx_repo_author                   | Used to built evilginx_url, can be updated to a alternative repo           | kgretzky                                                                                     |
+| evilginx_repo_name                     | Used to built evilginx_url,can be updated to a alternative repo            | evilginx2                                                                                    |
+| evilginx_version                       | Tag/Release/Branch to install                                              | v3.1.0                                                                                       |
+| evilginx_url                           | URL to clone evilginx repo from                                            | "https://github.com/{{ evilginx_repo_author }}/{{ evilginx_repo_name }}"                     |
+| evilginx_install_destination           | Installation directory                                                     | /opt/{{ evilginx_repo_name }}                                                                |
+| evilginx_phishlets_repo_author         | Used to built evilginx_phishlets_url, can be updated to a alternative repo | An0nUD4Y                                                                                     |
+| evilginx_phishlets_repo_name           | Used to built evilginx_phishlets_url, can be updated to a alternative repo | Evilginx2-Phishlets                                                                          |
+| evilginx_phishlets_version             | Tag/Release/Branch to install                                              | master                                                                                       |
+| evilginx_phishlets_url                 | URL to clone evilginx phishlet repo from                                   | "https://github.com/{{ evilginx_phishlets_repo_author }}/{{ evilginx_phishlets_repo_name }}" |
+| evilginx_phishlets_install_destination | Location where phishlets will be installed                                 | "/opt/{{ evilginx_phishlets_repo_name }}"                                                    |
 ## Dependencies
 
 [robertdebock.update_package_cache](https://github.com/robertdebock/ansible-role-update_package_cache)
@@ -36,10 +39,21 @@ None.
 
 ```yaml
 ---
-- hosts: evilginx2_hosts
+- hosts: evilginx_hosts
   become: yes
-  roles:
-    - role: justin_p.evilginx2
+  tasks:
+    - name: Run 'gantsign.golang'-role
+      ansible.builtin.include_role:
+        name: gantsign.golang
+      vars:
+        golang_install_dir: /opt/go
+
+    - name: Run 'justin_p.evilginx'-role
+      ansible.builtin.include_role:
+        name: justin_p.evilginx
+        apply:
+          environment:
+            PATH: "{{ ansible_env.PATH }}:/opt/go/bin"
 ```
 
 ### Deployment playbook
@@ -48,8 +62,8 @@ This playbook is tested as part of the role CI.
 
 ```yaml
 ---
-- name: Deploy Evilginx2
-  hosts: evilginx2_hosts
+- name: Deploy evilginx
+  hosts: evilginx_hosts
   tasks:
     - include_role:
         name: robertdebock.update_package_cache
@@ -72,8 +86,15 @@ This playbook is tested as part of the role CI.
       vars:
         hostname: evilginx.local
         hostname_reboot: no
+     - include_role:
+         name: gantsign.golang
+        vars:
+          golang_install_dir: /opt/go
     - include_role:
-      name: justin_p.evilginx2
+        name: justin_p.evilginx
+        apply:
+          environment:
+            PATH: "{{ ansible_env.PATH }}:/opt/go/bin"
 ```
 
 ## Local Development

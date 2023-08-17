@@ -19,3 +19,6 @@
 - src: https://github.com/robertdebock/ansible-role-hostname
   name: robertdebock.hostname
   version: 3.0.0
+- src: https://github.com/robertdebock/ansible-role-hostname
+  name: robertdebock.hostname
+  version: 3.2.0

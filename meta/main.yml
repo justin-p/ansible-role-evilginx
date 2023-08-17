@@ -1,8 +1,8 @@
 galaxy_info:
-  role_name: evilginx2
-  namespace: justin_p  
+  role_name: evilginx
+  namespace: justin_p
   author: Justin Perdok
-  description: evilginx2 is a man-in-the-middle attack framework used for phishing login credentials and session cookies
+  description: evilginx is a man-in-the-middle attack framework used for phishing login credentials and session cookies
 
   license: MIT
 
@@ -42,7 +42,7 @@ galaxy_info:
     #    - 7
     #    - 8
 
-  galaxy_tags: ["evilginx2", "phising"]
+  galaxy_tags: ["evilginx", "phising"]
 
 dependencies:
   - role: robertdebock.update_package_cache

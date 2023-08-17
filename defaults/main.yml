@@ -1,8 +1,12 @@
 ---
-# defaults file for evilginx2
-evilginx2_version: 2.4.0
-evilginx2_platform: linux
-evilginx2_arch: amd64
-evilginx2_sha256: sha256:595a77ddfb6f674bd5bc1c297ae912f5ebf6ba218a2f857ff46b7b37d1a9678b
-evilginx2_download_destination: "/tmp/evilginx2-{{ evilginx2_version }}-{{ evilginx2_platform }}-{{ evilginx2_arch }}.tar.gz"
-evilginx2_install_destination: /opt
+# defaults file for evilginx
+evilginx_repo_author: kgretzky
+evilginx_repo_name: evilginx2
+evilginx_version: v3.1.0
+evilginx_url: "https://github.com/{{ evilginx_repo_author }}/{{ evilginx_repo_name }}"
+evilginx_install_destination: /opt/{{ evilginx_repo_name }}
+evilginx_phishlets_repo_author: An0nUD4Y
+evilginx_phishlets_repo_name: Evilginx2-Phishlets
+evilginx_phishlets_version: master
+evilginx_phishlets_url: "https://github.com/{{ evilginx_phishlets_repo_author }}/{{ evilginx_phishlets_repo_name }}"
+evilginx_phishlets_install_destination: "/opt/{{ evilginx_phishlets_repo_name }}"

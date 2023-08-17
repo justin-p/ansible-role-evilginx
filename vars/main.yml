@@ -1,5 +1,5 @@
 ---
-# vars file for evilginx2
-evilginx2_url: "https://github.com/kgretzky/evilginx2/releases/download/{{ evilginx2_version }}/evilginx-{{ evilginx2_platform }}-{{ evilginx2_arch }}.tar.gz"
-evilginx2_packages:
+# vars file for evilginx
+evilginx_packages:
   - tmux
+  - make
