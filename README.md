@@ -15,18 +15,18 @@ None.
 
 `defaults/main.yml`
 
-| Variable                               | Description                                                                | Default value                                                                                |
-| -------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| evilginx_repo_author                   | Used to built evilginx_url, can be updated to a alternative repo           | kgretzky                                                                                     |
-| evilginx_repo_name                     | Used to built evilginx_url,can be updated to a alternative repo            | evilginx2                                                                                    |
-| evilginx_version                       | Tag/Release/Branch to install                                              | v3.1.0                                                                                       |
-| evilginx_url                           | URL to clone evilginx repo from                                            | "https://github.com/{{ evilginx_repo_author }}/{{ evilginx_repo_name }}"                     |
-| evilginx_install_destination           | Installation directory                                                     | /opt/{{ evilginx_repo_name }}                                                                |
-| evilginx_phishlets_repo_author         | Used to built evilginx_phishlets_url, can be updated to a alternative repo | An0nUD4Y                                                                                     |
-| evilginx_phishlets_repo_name           | Used to built evilginx_phishlets_url, can be updated to a alternative repo | Evilginx2-Phishlets                                                                          |
-| evilginx_phishlets_version             | Tag/Release/Branch to install                                              | master                                                                                       |
-| evilginx_phishlets_url                 | URL to clone evilginx phishlet repo from                                   | "https://github.com/{{ evilginx_phishlets_repo_author }}/{{ evilginx_phishlets_repo_name }}" |
-| evilginx_phishlets_install_destination | Location where phishlets will be installed                                 | "/opt/{{ evilginx_phishlets_repo_name }}"                                                    |
+| Variable                               | Description                                                                | Default value                                                                                  |
+| -------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| evilginx_repo_author                   | Used to built evilginx_url, can be updated to a alternative repo           | `kgretzky`                                                                                     |
+| evilginx_repo_name                     | Used to built evilginx_url,can be updated to a alternative repo            | `evilginx2`                                                                                    |
+| evilginx_version                       | Tag/Release/Branch to install                                              | `v3.1.0`                                                                                       |
+| evilginx_url                           | URL to clone evilginx repo from                                            | `"https://github.com/{{ evilginx_repo_author }}/{{ evilginx_repo_name }}"`                     |
+| evilginx_install_destination           | Installation directory                                                     | `/opt/{{ evilginx_repo_name }}`                                                                |
+| evilginx_phishlets_repo_author         | Used to built evilginx_phishlets_url, can be updated to a alternative repo | `An0nUD4Y`                                                                                     |
+| evilginx_phishlets_repo_name           | Used to built evilginx_phishlets_url, can be updated to a alternative repo | `Evilginx2-Phishlets`                                                                          |
+| evilginx_phishlets_version             | Tag/Release/Branch to install                                              | `master`                                                                                       |
+| evilginx_phishlets_url                 | URL to clone evilginx phishlet repo from                                   | `"https://github.com/{{ evilginx_phishlets_repo_author }}/{{ evilginx_phishlets_repo_name }}"` |
+| evilginx_phishlets_install_destination | Location where phishlets will be installed                                 | `"/opt/{{ evilginx_phishlets_repo_name }}"`                                                    |
 ## Dependencies
 
 [robertdebock.update_package_cache](https://github.com/robertdebock/ansible-role-update_package_cache)
