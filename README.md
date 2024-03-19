@@ -1,9 +1,8 @@
 # ansible-role-evilginx
 
-[![Ansible Role Name](https://img.shields.io/ansible/role/51897?label=Role%20Name&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/evilginx)
-[![Ansible Quality Score](https://img.shields.io/ansible/quality/51897?label=Ansible%20Quality%20Score&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/evilginx)
-[![Ansible Role Downloads](https://img.shields.io/ansible/role/d/51897?label=Ansible%20Role%20Downloads&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/evilginx)
-[![Github Actions](https://img.shields.io/github/workflow/status/justin-p/ansible-role-evilginx/CI?label=Github%20Actions&logo=github&style=flat-square)](https://github.com/justin-p/ansible-role-evilginx/actions)
+[![Ansible Role Name](https://img.shields.io/ansible/role/d/justin_p/evilginx2?style=flat-square
+)](https://galaxy.ansible.com/ui/standalone/roles/justin_p/evilginx2/)
+[![Github Actions](https://img.shields.io/github/actions/workflow/status/justin-p/ansible-role-evilginx/main.yml?label=Github%20Actions&logo=github&style=flat-square)](https://github.com/justin-p/ansible-role-evilginx/actions)
 
 A Ansible role that clones and builds the [evilginx](https://github.com/kgretzky/evilginx) application, clones a (configurable) additional [phishlet repository](https://github.com/An0nUD4Y/Evilginx2-Phishlets) and starts evilginx in a tmux session.
 
